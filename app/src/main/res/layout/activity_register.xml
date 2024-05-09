@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="219dp"
+            android:src="@drawable/logo" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="西南财经大学电脑义务维修队欢迎您！"
+            android:gravity="center"/>
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="使用前请先进行注册！"
+            android:gravity="center"/>
+
+        <EditText
+            android:id="@+id/editTextName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="姓名"
+            android:inputType="textPersonName"
+            android:minHeight="48dp" />
+
+        <EditText
+            android:id="@+id/editTextID"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="学号/工号"
+            android:inputType="number"
+            android:minHeight="48dp" />
+
+        <EditText
+            android:id="@+id/editTextPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="密码"
+            android:inputType="textPassword"
+            android:minHeight="48dp"
+            android:visibility="visible" />
+
+        <EditText
+            android:id="@+id/editTextConfirmPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="确认密码"
+            android:inputType="textPassword"
+            android:minHeight="48dp"
+            android:visibility="visible" />
+
+        <EditText
+            android:id="@+id/editTextPhone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="联系电话"
+            android:inputType="phone"
+            android:minHeight="48dp" />
+
+        <!-- 身份选择 -->
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="请选择您的身份：" />
+
+        <RadioGroup
+            android:id="@+id/radioGroupIdentity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/radioButtonTeacher"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="老师"/>
+
+            <RadioButton
+                android:id="@+id/radioButtonStudent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="学生"/>
+        </RadioGroup>
+
+        <!-- 注册按钮 -->
+        <Button
+            android:id="@+id/buttonRegister"
+            style="@style/RegisterButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="注册" />
+    </LinearLayout>
+</ScrollView>
