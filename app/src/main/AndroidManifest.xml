@@ -9,10 +9,9 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
-        android:supportsRtl="true"
-        android:theme="@style/Theme.MyProject"
-        tools:targetApi="31">
-        <activity android:name=".StartPage"
+        tools:targetApi="31"
+        android:theme="@style/AppTheme">
+        <activity android:name=".SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,9 +19,8 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".RegisterActivity"
-            android:exported="true"
-            tools:ignore="WrongManifestParent">
+        <activity android:name=".LoginOrRegisterActivity"
+            android:exported="true">
 
         </activity>
     </application>

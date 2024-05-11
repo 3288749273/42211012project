@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <resources>
+
+    <!-- 定义宋体字体样式 -->
+    <style name="AppFontStyle">
+        <item name="android:fontFamily">serif</item>
+    </style>
+
+    <!-- App 主题 -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- 将所有文本设置为宋体 -->
+        <item name="android:textViewStyle">@style/AppFontStyle</item>
+        <!-- 可以添加其他主题属性 -->
+    </style>
+
     <style name="SkipButtonStyle">
         <item name="android:textColor">@color/black</item>
         <item name="android:background">@android:color/transparent</item>
