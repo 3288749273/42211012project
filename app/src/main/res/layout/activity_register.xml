@@ -5,8 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    android:padding="16dp"
-    style="@style/AppFontStyle">
+    android:padding="16dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,7 +14,6 @@
 
 
         <TextView
-            android:id="@+id/textView3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -24,14 +22,13 @@
             android:textSize="24sp" />
 
         <TextView
-            android:id="@+id/textView3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
             style="@style/AppFontStyle"
             android:text="欢迎您！"
             android:textSize="24sp"
-            tools:ignore="DuplicateIds" />
+            />
 
 
         <EditText
@@ -93,24 +90,30 @@
 
         <RadioGroup
             android:id="@+id/radioGroupIdentity"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp">
 
             <RadioButton
                 android:id="@+id/radioButtonTeacher"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                style="@style/AppFontStyle"
-                android:text="老师"/>
+                android:layout_marginEnd="16dp"
+                android:text="老师"
+                tools:ignore="TouchTargetSizeCheck" />
 
             <RadioButton
                 android:id="@+id/radioButtonStudent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                style="@style/AppFontStyle"
-                android:text="学生"/>
+                android:text="学生"
+                tools:ignore="TouchTargetSizeCheck" />
+
         </RadioGroup>
+
 
         <!-- 注册按钮 -->
         <Button

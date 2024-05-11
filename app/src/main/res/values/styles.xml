@@ -11,8 +11,6 @@
         <!-- 将所有文本设置为宋体 -->
         <item name="android:textViewStyle">@style/AppFontStyle</item>
         <item name="android:editTextStyle">@style/AppFontStyle</item>
-        <item name="android:radioButtonStyle">@style/AppFontStyle</item>
-        <item name="android:buttonStyle">@style/AppFontStyle</item>
     </style>
 
     <!--跳过按钮-->
@@ -24,8 +22,8 @@
     <!--注册按钮-->
     <style name="RegisterButtonStyle" parent="AppFontStyle">
         <item name="android:textColor">@color/white</item>
-        <item name="android:backgroundTint">@color/blue</item>
-        <item name="android:textSize">16sp</item>
+        <item name="android:background">@drawable/rounded_corners</item>  <!-- 使用圆角背景 -->
+        <item name="android:textSize">20sp</item>
         <item name="android:gravity">center</item>
         <item name="android:layout_marginTop">8dp</item>
     </style>
