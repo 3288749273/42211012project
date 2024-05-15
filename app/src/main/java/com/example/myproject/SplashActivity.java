@@ -5,6 +5,8 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -57,6 +59,8 @@ public class SplashActivity extends AppCompatActivity {
     private void checkLoginStateAndLaunch() {
         SharedPreferences sharedPreferences = getSharedPreferences("user_prefs", MODE_PRIVATE);
         boolean isLoggedIn = sharedPreferences.getBoolean("is_logged_in", false);
+
+        Log.d("SplashActivity", "isLoggedIn: " + isLoggedIn);
 
         Intent intent;
         if (isLoggedIn) {

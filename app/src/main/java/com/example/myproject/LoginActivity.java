@@ -13,7 +13,6 @@ public class LoginActivity extends AppCompatActivity {
 
     private EditText editTextID;
     private EditText editTextPassword;
-
     private Button buttonLogin;
     private DatabaseHelper databaseHelper;
 
