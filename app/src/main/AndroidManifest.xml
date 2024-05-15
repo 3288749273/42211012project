@@ -35,7 +35,12 @@
         <activity android:name=".LoginActivity"
             android:exported="true"/>
 
-        <activity android:name=".HomeMenu"></activity>
+        <activity android:name=".HomeMenu"
+            android:exported="true"/>
+
+        <activity android:name=".CategoriesMenu"
+            android:exported="true"/>
+
 
 
     </application>

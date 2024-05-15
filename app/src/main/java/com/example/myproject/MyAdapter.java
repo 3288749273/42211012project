@@ -36,20 +36,7 @@ public class MyAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        View gridViewAndroid;
-        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
-        if (convertView == null) {
-            gridViewAndroid = new View(context);
-            gridViewAndroid = inflater.inflate(R.layout.gridview_item, null);
-            TextView textViewAndroid = (TextView) gridViewAndroid.findViewById(R.id.android_gridview_text);
-            ImageView imageViewAndroid = (ImageView) gridViewAndroid.findViewById(R.id.android_gridview_image);
-            textViewAndroid.setText(gridViewString[position]);
-            imageViewAndroid.setImageResource(gridViewImageId[position]);
-        } else {
-            gridViewAndroid = (View) convertView;
-        }
-
-        return gridViewAndroid;
+        return null;
     }
+
 }
