@@ -1,11 +1,11 @@
 package com.example.myproject;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,6 +26,10 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
+        initData();
+    }
+
+    private void initData() {
         databaseHelper = new DatabaseHelper(this);
 
         editTextName = findViewById(R.id.editTextName);
@@ -46,7 +50,6 @@ public class RegisterActivity extends AppCompatActivity {
                 String phone = editTextPhone.getText().toString();
                 int checkedId = radioGroupIdentity.getCheckedRadioButtonId();
 
-                // 检查ID是否为数字或字母
                 if (!id.matches("[0-9a-zA-Z]+")) {
                     Toast.makeText(RegisterActivity.this, "ID格式不正确", Toast.LENGTH_SHORT).show();
                     return;
@@ -55,7 +58,6 @@ public class RegisterActivity extends AppCompatActivity {
                     Toast.makeText(RegisterActivity.this, "请输入您的联系电话", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                // 检查手机号是否为数字
                 if (!phone.matches("[0-9]+")) {
                     Toast.makeText(RegisterActivity.this, "手机号格式不正确", Toast.LENGTH_SHORT).show();
                     return;
@@ -73,19 +75,33 @@ public class RegisterActivity extends AppCompatActivity {
                     return;
                 }
 
-                RadioButton selectedRadioButton = findViewById(checkedId);
-                String identity = selectedRadioButton.getText().toString();
-
-                // Add user to the database
-                boolean isInserted = databaseHelper.addUser(name, id, password, confirm, phone);
-                if (isInserted) {
-                    Toast.makeText(RegisterActivity.this, "注册成功: " + name, Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(RegisterActivity.this, HomeMenu.class);
+                if (databaseHelper.isUserExists(id)) {
+                    // 用户已存在，提示并跳转到登录页面
+                    Toast.makeText(RegisterActivity.this, "用户已存在，请登录", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
                     startActivity(intent);
+                    finish();
                 } else {
-                    Toast.makeText(RegisterActivity.this, "注册失败", Toast.LENGTH_SHORT).show();
+                    boolean isInserted = databaseHelper.addUser(name, id, password, phone);
+                    if (isInserted) {
+                        Toast.makeText(RegisterActivity.this, "注册成功: " + name, Toast.LENGTH_SHORT).show();
+                        saveLoginState(id); // 保存登录状态
+                        Intent intent = new Intent(RegisterActivity.this, HomeMenu.class);
+                        startActivity(intent);
+                        finish();
+                    } else {
+                        Toast.makeText(RegisterActivity.this, "注册失败", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });
+    }
+
+    private void saveLoginState(String userId) {
+        SharedPreferences sharedPreferences = getSharedPreferences("user_prefs", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("user_id", userId); // 保存用户ID
+        editor.putBoolean("is_logged_in", true); // 保存登录状态
+        editor.apply();
     }
 }

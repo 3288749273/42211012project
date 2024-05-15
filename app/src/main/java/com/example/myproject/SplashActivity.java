@@ -1,10 +1,10 @@
 package com.example.myproject;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import androidx.appcompat.app.AppCompatActivity;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -34,8 +34,8 @@ public class SplashActivity extends AppCompatActivity {
                     // 每1000毫秒更新一次
                     handler.postDelayed(this, 1000);
                 } else {
-                    // 倒计时结束，跳转到主页面
-                    launchHomeActivity();
+                    // 倒计时结束，跳转到相应页面
+                    checkLoginStateAndLaunch();
                 }
             }
         };
@@ -44,8 +44,8 @@ public class SplashActivity extends AppCompatActivity {
         skipButton.setOnClickListener(v -> {
             // 移除所有的回调，防止倒计时再次触发
             handler.removeCallbacks(runnable);
-            // 跳转到主页面
-            launchHomeActivity();
+            // 立即检查登录状态并跳转
+            checkLoginStateAndLaunch();
         });
 
         // 初始化倒计时文本
@@ -54,10 +54,19 @@ public class SplashActivity extends AppCompatActivity {
         handler.postDelayed(runnable, 1000);
     }
 
-    private void launchHomeActivity() {
-        Intent intent = new Intent(SplashActivity.this, LoginOrRegisterActivity.class);
+    private void checkLoginStateAndLaunch() {
+        SharedPreferences sharedPreferences = getSharedPreferences("user_prefs", MODE_PRIVATE);
+        boolean isLoggedIn = sharedPreferences.getBoolean("is_logged_in", false);
+
+        Intent intent;
+        if (isLoggedIn) {
+            // 用户已登录，跳转到主界面
+            intent = new Intent(SplashActivity.this, HomeMenu.class);
+        } else {
+            // 用户未登录，跳转到登录或注册界面
+            intent = new Intent(SplashActivity.this, LoginOrRegisterActivity.class);
+        }
         startActivity(intent);
         finish(); // 关闭当前的SplashActivity
     }
 }
-

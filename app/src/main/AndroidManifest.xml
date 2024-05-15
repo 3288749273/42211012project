@@ -3,8 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.myproject">
 
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
 
     <application
         android:allowBackup="true"
@@ -33,6 +34,9 @@
 
         <activity android:name=".LoginActivity"
             android:exported="true"/>
+
+        <activity android:name=".HomeMenu"></activity>
+
 
     </application>
 

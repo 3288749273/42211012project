@@ -1,6 +1,7 @@
 package com.example.myproject;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -12,6 +13,8 @@ public class LoginActivity extends AppCompatActivity {
 
     private EditText editTextID;
     private EditText editTextPassword;
+
+    private Button buttonLogin;
     private DatabaseHelper databaseHelper;
 
     @Override
@@ -19,6 +22,9 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        initData();
+    }
+    private void initData() {
         databaseHelper = new DatabaseHelper(this);
 
         editTextID = findViewById(R.id.editTextID);
@@ -35,26 +41,23 @@ public class LoginActivity extends AppCompatActivity {
 
                 if (isValid) {
                     // 登录成功，跳转到主页
+                    Toast.makeText(LoginActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(LoginActivity.this, HomeMenu.class);
                     startActivity(intent);
                     finish(); // 结束当前的登录页面
                 } else {
                     // 登录失败，显示提示信息
-                    Toast.makeText(LoginActivity.this, "学号/工号或密码错误", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "登陆失败", Toast.LENGTH_SHORT).show();
                 }
             }
         });
 
-// 添加点击注册按钮跳转到HomePageActivity的逻辑
-        Button btnRegister = findViewById(R.id.buttonLogin);
-        btnRegister.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // 跳转到注册页面
-                Intent intent = new Intent(LoginActivity.this, HomeMenu.class);
-                startActivity(intent);
-            }
-        });
-
+    }
+    private void saveLoginState(String userId) {
+        SharedPreferences sharedPreferences = getSharedPreferences("user_prefs", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("user_id", userId); // 保存用户ID
+        editor.putBoolean("is_logged_in", true); // 保存登录状态
+        editor.apply();
     }
 }
