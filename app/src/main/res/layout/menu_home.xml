@@ -169,10 +169,11 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:id="@+id/menu01"
             >
 
             <ImageView
-                android:id="@+id/img1"
+                android:id="@+id/menu1"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_centerHorizontal="true"
@@ -181,9 +182,10 @@
                 tools:ignore="DuplicateIds" />
 
             <TextView
+                android:id="@+id/menu_text1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/img1"
+                android:layout_below="@+id/menu1"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="5dp"
                 android:gravity="center"
@@ -194,10 +196,11 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:id="@+id/menu02"
             >
 
             <ImageView
-                android:id="@+id/img1"
+                android:id="@+id/menu2"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_centerHorizontal="true"
@@ -205,9 +208,10 @@
                 android:background="@mipmap/categories" />
 
             <TextView
+                android:id="@+id/menu_text2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/img1"
+                android:layout_below="@+id/menu2"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="5dp"
                 android:gravity="center"
@@ -219,10 +223,11 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:id="@+id/menu03"
             >
 
             <ImageView
-                android:id="@+id/img1"
+                android:id="@+id/menu3"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_centerHorizontal="true"
@@ -230,9 +235,10 @@
                 android:background="@mipmap/news" />
 
             <TextView
+                android:id="@+id/menu_text3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/img1"
+                android:layout_below="@+id/menu3"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="5dp"
                 android:gravity="center"
@@ -244,10 +250,11 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:id="@+id/menu04"
             >
 
             <ImageView
-                android:id="@+id/img1"
+                android:id="@+id/menu4"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_centerHorizontal="true"
@@ -255,13 +262,18 @@
                 android:background="@mipmap/my" />
 
             <TextView
+                android:id="@+id/menu_text4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/img1"
+                android:layout_below="@+id/menu4"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="5dp"
                 android:gravity="center"
                 android:text="我的" />
+
+
+
+
 
         </RelativeLayout>
 

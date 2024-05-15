@@ -35,7 +35,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 if (isValid) {
                     // 登录成功，跳转到主页
-                    Intent intent = new Intent(LoginActivity.this, HomePageActivity.class);
+                    Intent intent = new Intent(LoginActivity.this, HomeMenu.class);
                     startActivity(intent);
                     finish(); // 结束当前的登录页面
                 } else {
@@ -51,7 +51,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // 跳转到注册页面
-                Intent intent = new Intent(LoginActivity.this, HomePageActivity.class);
+                Intent intent = new Intent(LoginActivity.this, HomeMenu.class);
                 startActivity(intent);
             }
         });
