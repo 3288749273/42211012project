@@ -5,6 +5,7 @@
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
 
     <application
@@ -41,7 +42,8 @@
         <activity android:name=".CategoriesMenu"
             android:exported="true"/>
 
-
+        <activity android:name=".MessagesMenu"
+            android:exported="true"/>
 
     </application>
 
