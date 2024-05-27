@@ -47,6 +47,20 @@
         android:elevation="2dp">
 
         <TextView
+            android:id="@+id/my_massages"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:text="个人信息"
+            android:textSize="18sp"
+            android:textColor="#333" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#DDDDDD" />
+
+        <TextView
             android:id="@+id/account_security"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

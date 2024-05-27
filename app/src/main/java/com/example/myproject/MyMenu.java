@@ -31,6 +31,7 @@ public class MyMenu extends AppCompatActivity {
     private static final int REQUEST_PERMISSION = 100;
     private ImageView profileImage;
     private TextView profileName;
+    private TextView myMassages;
     private TextView accountSecurity;
     private TextView helpCenter;
     private TextView about;
@@ -44,6 +45,7 @@ public class MyMenu extends AppCompatActivity {
 
         profileImage = findViewById(R.id.profile_image);
         profileName = findViewById(R.id.profile_name);
+        myMassages = findViewById(R.id.my_massages);
         accountSecurity = findViewById(R.id.account_security);
         helpCenter = findViewById(R.id.help_center);
         about = findViewById(R.id.about);
@@ -59,6 +61,14 @@ public class MyMenu extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 showImageOptions();
+            }
+        });
+
+        myMassages.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 跳转到个人信息页面
+                // startActivity(new Intent(MyMenu.this, AccountSecurityActivity.class));
             }
         });
 
