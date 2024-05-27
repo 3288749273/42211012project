@@ -57,6 +57,9 @@
 
         <activity android:name=".MyMenu"
             android:exported="true"/>
+
+        <activity android:name=".FAQActivity" />
+
     </application>
 
 </manifest>
