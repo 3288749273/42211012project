@@ -2,6 +2,7 @@ package com.example.myproject;
 
 import android.Manifest;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
@@ -46,11 +47,12 @@ public class MyMenu extends AppCompatActivity {
         accountSecurity = findViewById(R.id.account_security);
         helpCenter = findViewById(R.id.help_center);
         about = findViewById(R.id.about);
-
         databaseHelper = new DatabaseHelper(this);
+        SharedPreferences sharedPreferences = getSharedPreferences("user_prefs", MODE_PRIVATE);
+        String userId = sharedPreferences.getString("user_id", "");
 
         // 从数据库中获取用户信息
-        loadUserProfile();
+        loadUserProfile(userId);
 
         // 设置点击事件
         profileImage.setOnClickListener(new View.OnClickListener() {
@@ -85,19 +87,19 @@ public class MyMenu extends AppCompatActivity {
         });
     }
 
-    private void loadUserProfile() {
-        Cursor cursor = databaseHelper.getUser("1");
+    private void loadUserProfile(String userId) {
+        Cursor cursor = databaseHelper.getUser(userId);
         if (cursor.moveToFirst()) {
             String name = cursor.getString(cursor.getColumnIndexOrThrow("name"));
-            String profileImagePath = cursor.getString(cursor.getColumnIndexOrThrow("image"));
+            profileName.setText(name); // 设置 TextView 的 text 为从数据库获取的 name
 
-            profileName.setText(name);
-            if (profileImagePath != null && !profileImagePath.isEmpty()) {
-                profileImage.setImageURI(Uri.parse(profileImagePath));
-                Log.d("MyMenu", "头像路径加载成功: " + profileImagePath);
+            String imagePath = cursor.getString(cursor.getColumnIndexOrThrow("image"));
+            if (imagePath != null && !imagePath.isEmpty()) {
+                // 使用用户选择的头像
+                profileImage.setImageURI(Uri.parse(imagePath));
             } else {
-                profileImage.setImageResource(R.drawable.moren); // 默认头像
-                Log.d("MyMenu", "使用默认头像");
+                // 使用默认头像
+                profileImage.setImageResource(R.drawable.moren);
             }
         }
         cursor.close();
@@ -188,7 +190,6 @@ public class MyMenu extends AppCompatActivity {
                 }
             }
             // 重新加载用户信息以确保更新的头像被正确加载
-            loadUserProfile();
         }
     }
     private String getRealPathFromURI(Uri contentUri) {

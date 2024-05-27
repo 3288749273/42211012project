@@ -40,6 +40,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(CREATE_USER_TABLE);
     }
 
+
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // 删除旧表
@@ -107,10 +108,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.close();
         if (rowsAffected > 0) {
             Log.d("DatabaseHelper", "头像路径更新成功: " + imagePath);
+            return true;
         } else {
             Log.d("DatabaseHelper", "头像路径更新失败: " + imagePath);
+            return false;
         }
-        return rowsAffected > 0;
     }
+
 }
 
