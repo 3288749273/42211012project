@@ -15,6 +15,7 @@
         android:background="#F5F5F6"
         android:textSize="24dp"
         android:textStyle="bold" />
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
