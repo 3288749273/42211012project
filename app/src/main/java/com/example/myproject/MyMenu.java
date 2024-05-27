@@ -56,11 +56,7 @@ public class MyMenu extends AppCompatActivity {
         profileImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (checkSelfPermission()) {
-                    showImageOptions();
-                } else {
-                    requestPermission();
-                }
+                showImageOptions();
             }
         });
 
@@ -88,15 +84,6 @@ public class MyMenu extends AppCompatActivity {
             }
         });
     }
-    private boolean checkSelfPermission() {
-        return ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED
-                && ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
-                && ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED;
-    };
-
-    private void requestPermission() {
-        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_PERMISSION);
-    };
 
     private void loadUserProfile() {
         Cursor cursor = databaseHelper.getUser("1");
@@ -178,20 +165,26 @@ public class MyMenu extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
-            Uri imageUri = null;
             if (requestCode == REQUEST_IMAGE_CAPTURE) {
-                imageUri = photoURI;
+                if (photoURI != null) {
+                    profileImage.setImageURI(photoURI);
+                    // 将头像路径存储到数据库中
+                    boolean isSaved = databaseHelper.updateUserProfileImage("1", photoURI.toString());
+                    if (isSaved) {
+                        Log.d("MyMenu", "头像路径保存成功: " + photoURI.toString());
+                    } else {
+                        Log.d("MyMenu", "头像路径保存失败: " + photoURI.toString());
+                    }
+                }
             } else if (requestCode == REQUEST_PICK_PHOTO && data != null) {
-                imageUri = data.getData();
-            }
-            if (imageUri != null) {
-                String imagePath = getRealPathFromURI(imageUri);
+                Uri imageUri = data.getData();
                 profileImage.setImageURI(imageUri);
-                boolean isSaved = databaseHelper.updateUserProfileImage("1", imagePath);
+                // 将头像路径存储到数据库中
+                boolean isSaved = databaseHelper.updateUserProfileImage("1", imageUri.toString());
                 if (isSaved) {
-                    Log.d("MyMenu", "头像路径保存成功: " + imagePath);
+                    Log.d("MyMenu", "头像路径保存成功: " + imageUri.toString());
                 } else {
-                    Log.d("MyMenu", "头像路径保存失败: " + imagePath);
+                    Log.d("MyMenu", "头像路径保存失败: " + imageUri.toString());
                 }
             }
             // 重新加载用户信息以确保更新的头像被正确加载
@@ -219,8 +212,6 @@ public class MyMenu extends AppCompatActivity {
         if (requestCode == REQUEST_PERMISSION) {
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 showImageOptions();
-            } else {
-                Toast.makeText(this, "权限请求被拒绝", Toast.LENGTH_SHORT).show();
             }
         }
     }
