@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            style="@style/AppFontStyle"
+            android:text="管理员登录"
+            android:textSize="24sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            style="@style/AppFontStyle"
+            android:text="请输入您的账号和密码"
+            android:textSize="20sp"
+            android:layout_marginTop="8dp" />
+
+        <EditText
+            android:id="@+id/editTextAdminID"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/AppFontStyle"
+            android:hint="账号"
+            android:inputType="text"
+            android:minHeight="48dp"
+            android:layout_marginTop="16dp" />
+
+        <EditText
+            android:id="@+id/editTextAdminPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/AppFontStyle"
+            android:hint="密码"
+            android:inputType="textPassword"
+            android:minHeight="48dp"
+            android:layout_marginTop="16dp" />
+
+        <Button
+            android:id="@+id/buttonAdminLogin"
+            style="@style/RegisterButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="登录"
+            android:layout_marginTop="24dp"
+            />
+    </LinearLayout>
+</ScrollView>

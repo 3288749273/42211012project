@@ -6,8 +6,11 @@
         android:name="android.hardware.camera"
         android:required="false" />
 
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="32"
+        tools:ignore="ScopedStorage" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="32" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
 
@@ -63,6 +66,16 @@
 
         <activity android:name=".QuestionsHome"
             android:exported="true"/>
+
+        <activity android:name=".AdminLoginActivity"/>
+
+        <activity android:name=".ManageActivity"
+            android:exported="true"/>
+
+        <activity android:name=".ManageFAQActivity"
+            android:exported="true"
+            tools:ignore="DuplicateActivity" />
+
 
 
     </application>

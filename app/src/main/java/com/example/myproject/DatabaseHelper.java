@@ -1,5 +1,6 @@
 package com.example.myproject;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -10,7 +11,7 @@ import android.util.Log;
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "user.db";
-    private static final int DATABASE_VERSION = 4; // 修改版本号为4
+    private static final int DATABASE_VERSION = 7; // 修改版本号为7
 
     // 用户表
     private static final String TABLE_USER = "users";
@@ -25,6 +26,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String COLUMN_FAQ_ID = "_id";
     public static final String COLUMN_QUESTION = "question";
     public static final String COLUMN_ANSWER = "answer";
+
+    // 管理员用户表
+    private static final String TABLE_ADMIN_USER = "admin_users";
+    private static final String COLUMN_ADMIN_ID = "id";
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -47,7 +52,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 + COLUMN_QUESTION + " TEXT,"
                 + COLUMN_ANSWER + " TEXT" + ")";
         db.execSQL(CREATE_FAQ_TABLE);
+
+        // 创建管理员用户表
+        String CREATE_ADMIN_USER_TABLE = "CREATE TABLE " + TABLE_ADMIN_USER + "("
+                + COLUMN_ADMIN_ID + " TEXT PRIMARY KEY" + ")";
+        db.execSQL(CREATE_ADMIN_USER_TABLE);
+        // 添加第一个管理员用户
+        String firstAdminId = "42211012";
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_ADMIN_ID, firstAdminId);
+        db.insert(TABLE_ADMIN_USER, null, values);
     }
+
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
@@ -55,6 +71,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             // 删除旧表
             db.execSQL("DROP TABLE IF EXISTS " + TABLE_USER);
             db.execSQL("DROP TABLE IF EXISTS " + TABLE_FAQ);
+            db.execSQL("DROP TABLE IF EXISTS " + TABLE_ADMIN_USER);
             // 重新创建表
             onCreate(db);
         }
@@ -153,5 +170,84 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         int rowsAffected = db.delete(TABLE_FAQ, COLUMN_FAQ_ID + " = ?", new String[]{String.valueOf(id)});
         db.close();
         return rowsAffected > 0;
+    }
+
+    // 添加管理员用户
+    public boolean addAdminUser(String id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_ADMIN_ID, id);
+
+        long result = db.insert(TABLE_ADMIN_USER, null, values);
+        db.close();
+        return result != -1;
+    }
+
+    // 删除管理员用户
+    public boolean deleteAdminUser(String id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        int result = db.delete(TABLE_ADMIN_USER, COLUMN_ADMIN_ID + "=?", new String[]{id});
+        db.close();
+        return result > 0;
+    }
+
+    // 验证管理员用户
+    public boolean checkAdminUser(String id, String password) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        // 从用户表中获取密码
+        Cursor userCursor = db.query(TABLE_USER,
+                new String[]{COLUMN_PASSWORD},
+                COLUMN_ID + "=?",
+                new String[]{id},
+                null, null, null);
+
+        if (userCursor != null && userCursor.moveToFirst()) {
+            @SuppressLint("Range") String storedPassword = userCursor.getString(userCursor.getColumnIndex(COLUMN_PASSWORD));
+            userCursor.close();
+
+            // 检查管理员表中是否存在该用户
+            Cursor adminCursor = db.query(TABLE_ADMIN_USER,
+                    new String[]{COLUMN_ADMIN_ID},
+                    COLUMN_ADMIN_ID + "=?",
+                    new String[]{id},
+                    null, null, null);
+
+            boolean isAdmin = adminCursor.getCount() > 0;
+            adminCursor.close();
+            db.close();
+
+            // 验证密码
+            return isAdmin && storedPassword.equals(password);
+        }
+
+        db.close();
+        return false;
+    }
+    // 添加现有用户到管理员表
+    public boolean addAdminUserById(String userId) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(TABLE_USER,
+                new String[]{COLUMN_ID},
+                COLUMN_ID + "=?",
+                new String[]{userId},
+                null, null, null);
+        if (cursor.getCount() > 0) {
+            cursor.close();
+            db.close();
+            return addAdminUser(userId);
+        } else {
+            cursor.close();
+            db.close();
+            return false;
+        }
+    }
+    public boolean adminUserExists(String id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(TABLE_ADMIN_USER, new String[]{COLUMN_ADMIN_ID}, COLUMN_ADMIN_ID + "=?", new String[]{id}, null, null, null);
+        boolean exists = cursor.getCount() > 0;
+        cursor.close();
+        db.close();
+        return exists;
     }
 }

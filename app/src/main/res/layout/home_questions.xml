@@ -4,7 +4,9 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp"
-    android:background="#F5F5F5">
+    android:background="#F5F5F6">
+
+
 
     <TextView
         android:layout_width="match_parent"
@@ -17,10 +19,8 @@
         android:textStyle="bold" />
 
     <ListView
-        android:id="@+id/faqListView"
-        android:background="#FFFFFF"
-
+        android:id="@+id/listViewFAQs"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-
+        android:layout_height="wrap_content"
+        android:background="@color/white" />
 </LinearLayout>

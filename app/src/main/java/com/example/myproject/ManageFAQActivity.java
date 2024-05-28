@@ -4,7 +4,6 @@ import android.content.DialogInterface;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -14,7 +13,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-public class QuestionsHome extends AppCompatActivity {
+public class ManageFAQActivity extends AppCompatActivity {
 
     private DatabaseHelper db;
     private SimpleCursorAdapter adapter;
@@ -23,11 +22,13 @@ public class QuestionsHome extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.home_questions); // 请确保这个布局文件存在
+        setContentView(R.layout.activity_manage_faq);
 
         db = new DatabaseHelper(this);
         listViewFAQs = findViewById(R.id.listViewFAQs);
 
+        Button buttonAddFAQ = findViewById(R.id.buttonAddFAQ);
+        buttonAddFAQ.setOnClickListener(v -> showAddFAQDialog());
 
         listViewFAQs.setOnItemClickListener((parent, view, position, id) -> {
             TextView answerTextView = view.findViewById(R.id.answerTextView);
@@ -43,7 +44,7 @@ public class QuestionsHome extends AppCompatActivity {
 
     private void showAddFAQDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Add FAQ");
+        builder.setTitle("添加FAQ");
 
         View view = getLayoutInflater().inflate(R.layout.dialog_add_faq, null);
         final EditText editTextQuestion = view.findViewById(R.id.editTextQuestion);
@@ -51,18 +52,18 @@ public class QuestionsHome extends AppCompatActivity {
 
         builder.setView(view);
 
-        builder.setPositiveButton("Add", (dialog, which) -> {
+        builder.setPositiveButton("添加", (dialog, which) -> {
             String question = editTextQuestion.getText().toString().trim();
             String answer = editTextAnswer.getText().toString().trim();
             if (!question.isEmpty() && !answer.isEmpty()) {
                 db.addFAQ(question, answer);
                 loadFAQs();
             } else {
-                Toast.makeText(QuestionsHome.this, "Please enter both question and answer", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ManageFAQActivity.this, "请输入问题和答案！", Toast.LENGTH_SHORT).show();
             }
         });
 
-        builder.setNegativeButton("Cancel", null);
+        builder.setNegativeButton("取消", null);
 
         builder.create().show();
     }
