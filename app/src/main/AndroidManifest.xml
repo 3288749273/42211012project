@@ -58,7 +58,12 @@
         <activity android:name=".MyMenu"
             android:exported="true"/>
 
-        <activity android:name=".FAQActivity" />
+        <activity android:name=".FAQActivity"
+            android:exported="true"/>
+
+        <activity android:name=".QuestionsHome"
+            android:exported="true"/>
+
 
     </application>
 

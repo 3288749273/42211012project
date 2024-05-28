@@ -7,12 +7,10 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import androidx.annotation.Nullable;
-
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "user.db";
-    private static final int DATABASE_VERSION = 2; // 修改版本号为2
+    private static final int DATABASE_VERSION = 4; // 修改版本号为4
 
     // 用户表
     private static final String TABLE_USER = "users";
@@ -24,20 +22,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     // FAQ表
     private static final String TABLE_FAQ = "faqs";
-    private static final String COLUMN_FAQ_ID = "id";
+    private static final String COLUMN_FAQ_ID = "_id";
     public static final String COLUMN_QUESTION = "question";
     public static final String COLUMN_ANSWER = "answer";
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
-    }
-
-    public String getColumnQuestion() {
-        return COLUMN_QUESTION;
-    }
-
-    public String getColumnAnswer() {
-        return COLUMN_ANSWER;
     }
 
     @Override
@@ -61,11 +51,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        // 删除旧表
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_USER);
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_FAQ);
-        // 重新创建表
-        onCreate(db);
+        if (oldVersion < newVersion) {
+            // 删除旧表
+            db.execSQL("DROP TABLE IF EXISTS " + TABLE_USER);
+            db.execSQL("DROP TABLE IF EXISTS " + TABLE_FAQ);
+            // 重新创建表
+            onCreate(db);
+        }
     }
 
     // 添加用户
