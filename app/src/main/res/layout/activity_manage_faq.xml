@@ -24,10 +24,29 @@
 
     <Button
         android:id="@+id/buttonAddFAQ"
+        style="@style/RegisterButtonStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="添加常见问题"
+        android:background="?android:attr/selectableItemBackground"
+        android:textColor="?android:attr/textColorPrimary" />
+    <Button
+        android:id="@+id/buttonDeleteFAQ"
+        style="@style/RegisterButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="删除常见问题"
+        android:background="?android:attr/selectableItemBackground"
+        android:textColor="?android:attr/textColorPrimary" />
+    <Button
+        android:id="@+id/buttonRevisedFAQ"
+        style="@style/RegisterButtonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="修改常见问题"
         android:background="?android:attr/selectableItemBackground"
         android:textColor="?android:attr/textColorPrimary" />
 
