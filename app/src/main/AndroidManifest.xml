@@ -67,7 +67,6 @@
         <activity android:name=".QuestionsHome"
             android:exported="true"/>
 
-        <activity android:name=".AdminLoginActivity"/>
 
         <activity android:name=".ManageActivity"
             android:exported="true"/>

@@ -48,7 +48,7 @@ public class CategoriesMenu extends AppCompatActivity {
                         startActivity(new Intent(CategoriesMenu.this, FAQActivity.class));
                         break;
                     case 12:
-                        startActivity(new Intent(CategoriesMenu.this, AdminLoginActivity.class));
+                        startActivity(new Intent(CategoriesMenu.this, ManageActivity.class));
 
 
                     default:

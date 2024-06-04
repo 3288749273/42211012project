@@ -37,6 +37,7 @@ public class ManageActivity extends AppCompatActivity {
             }
         });
     }
+
     private void saveLoginState(String adminID) {
         SharedPreferences sharedPreferences = getSharedPreferences("user_prefs", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -61,9 +62,6 @@ public class ManageActivity extends AppCompatActivity {
             Toast.makeText(ManageActivity.this, "管理用户功能尚未实现", Toast.LENGTH_SHORT).show();
         });
     }
-
-    // 添加默认用户的方法
-    private void addDefaultUser(String id) {
-        db.addAdminUserById(id);
-    }
 }
+
+

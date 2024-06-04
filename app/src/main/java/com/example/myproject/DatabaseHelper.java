@@ -52,6 +52,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 + COLUMN_QUESTION + " TEXT,"
                 + COLUMN_ANSWER + " TEXT" + ")";
         db.execSQL(CREATE_FAQ_TABLE);
+        // 插入默认问答数据
 
         // 创建管理员用户表
         String CREATE_ADMIN_USER_TABLE = "CREATE TABLE " + TABLE_ADMIN_USER + "("
@@ -146,6 +147,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
+
     // 添加FAQ
     public boolean addFAQ(String question, String answer) {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -156,6 +158,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         long result = db.insert(TABLE_FAQ, null, values);
         db.close();
         return result != -1;
+    }
+
+    private void addDefaultFAQs(SQLiteDatabase db) {
+        addFAQ("校园网认证提示“用户不存在”或“用户没有申请该服务”", "请先检查以下五个问题："+"");
+        addFAQ("如何修改密码？", "登录后进入设置页面，可以找到修改密码的选项。");
     }
 
     // 获取所有FAQs
