@@ -1,7 +1,6 @@
 package com.example.myproject;
 
-import android.content.DialogInterface;
-import android.database.Cursor;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -12,10 +11,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 public class ManageFAQActivity extends AppCompatActivity {
 
-    private DatabaseHelper db;
     private SimpleCursorAdapter adapter;
     private ListView listViewFAQs;
 
@@ -24,22 +24,12 @@ public class ManageFAQActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manage_faq);
 
-        db = new DatabaseHelper(this);
         listViewFAQs = findViewById(R.id.listViewFAQs);
 
         Button buttonAddFAQ = findViewById(R.id.buttonAddFAQ);
         buttonAddFAQ.setOnClickListener(v -> showAddFAQDialog());
 
-        listViewFAQs.setOnItemClickListener((parent, view, position, id) -> {
-            TextView answerTextView = view.findViewById(R.id.answerTextView);
-            if (answerTextView.getVisibility() == View.GONE) {
-                answerTextView.setVisibility(View.VISIBLE);
-            } else {
-                answerTextView.setVisibility(View.GONE);
-            }
-        });
-
-        loadFAQs();
+        new LoadFAQsTask().execute();
     }
 
     private void showAddFAQDialog() {
@@ -56,8 +46,7 @@ public class ManageFAQActivity extends AppCompatActivity {
             String question = editTextQuestion.getText().toString().trim();
             String answer = editTextAnswer.getText().toString().trim();
             if (!question.isEmpty() && !answer.isEmpty()) {
-                db.addFAQ(question, answer);
-                loadFAQs();
+                new AddFAQTask().execute(question, answer);
             } else {
                 Toast.makeText(ManageFAQActivity.this, "请输入问题和答案！", Toast.LENGTH_SHORT).show();
             }
@@ -68,12 +57,44 @@ public class ManageFAQActivity extends AppCompatActivity {
         builder.create().show();
     }
 
-    private void loadFAQs() {
-        Cursor cursor = db.getAllFAQs();
-        String[] from = {DatabaseHelper.COLUMN_QUESTION, DatabaseHelper.COLUMN_ANSWER};
-        int[] to = {R.id.questionTextView, R.id.answerTextView};
+    private class LoadFAQsTask extends AsyncTask<Void, Void, String> {
+        @Override
+        protected String doInBackground(Void... voids) {
+            return HttpHelper.sendRequest("http://192.168.237.131:8080/myproject/faq", "GET", null);
+        }
 
-        adapter = new SimpleCursorAdapter(this, R.layout.home_questions_item, cursor, from, to, 0);
-        listViewFAQs.setAdapter(adapter);
+        @Override
+        protected void onPostExecute(String result) {
+            if (result != null) {
+                try {
+                    JSONArray jsonArray = new JSONArray(result);
+                    // 将数据转换为Cursor对象，并绑定到ListView
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            } else {
+                Toast.makeText(ManageFAQActivity.this, "加载FAQ失败", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    private class AddFAQTask extends AsyncTask<String, Void, String> {
+        @Override
+        protected String doInBackground(String... params) {
+            String question = params[0];
+            String answer = params[1];
+            String param = "question=" + question + "&answer=" + answer;
+            return HttpHelper.sendRequest("http://192.168.237.131:8080/myproject/faq", "POST", param);
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            if (result != null && result.equals("created")) {
+                Toast.makeText(ManageFAQActivity.this, "FAQ添加成功", Toast.LENGTH_SHORT).show();
+                new LoadFAQsTask().execute();
+            } else {
+                Toast.makeText(ManageFAQActivity.this, "添加FAQ失败", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 }
