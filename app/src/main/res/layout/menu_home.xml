@@ -156,10 +156,47 @@
                     android:layout_marginRight="10dp"
                     android:text="更多"
                     android:textColor="#666"
-
                     android:textSize="16dp"
                     android:textStyle="bold" />
+
+
             </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="#FFFFFF"
+            android:orientation="horizontal"
+            android:weightSum="4">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_weight="3"
+                android:orientation="vertical"
+                android:id="@+id/homenews">
+
+
+
+                <TextView
+                    android:id="@+id/listViewNews"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/white"
+                    android:gravity="center_vertical"
+                    android:text="校园网新版认证系统使用帮助"
+                    android:textSize="20dp" />
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:background="@mipmap/img3">
+                </ImageView>
+
+            </LinearLayout>
+        </LinearLayout>
 
         </LinearLayout>
 

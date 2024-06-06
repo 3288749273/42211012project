@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -26,6 +27,8 @@ public class HomeMenu extends AppCompatActivity {
         RelativeLayout menu02 = findViewById(R.id.menu02);
         RelativeLayout menu03 = findViewById(R.id.menu03);
         RelativeLayout menu04 = findViewById(R.id.menu04);
+
+        ListView listViewNews = findViewById(R.id.listViewNews);
 
         homequestions.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,6 +84,14 @@ public class HomeMenu extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(HomeMenu.this, MyMenu.class);
+                startActivity(intent);
+            }
+        });
+
+        listViewNews.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HomeMenu.this, NewsHome.class);
                 startActivity(intent);
             }
         });
