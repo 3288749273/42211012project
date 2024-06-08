@@ -87,6 +87,27 @@
             android:exported="true"
             tools:ignore="DuplicateActivity" />
 
+        <activity android:name=".Test"
+            android:exported="true"
+            tools:ignore="DuplicateActivity" />
+
+        <activity android:name=".Email"
+            android:exported="true"
+            tools:ignore="DuplicateActivity" />
+
+        <activity android:name=".Internet"
+            android:exported="true"
+            tools:ignore="DuplicateActivity" />
+
+        <activity android:name=".ZBH"
+            android:exported="true"
+            tools:ignore="DuplicateActivity" />
+
+        <activity android:name=".VPN"
+            android:exported="true"
+            tools:ignore="DuplicateActivity" />
+
+
 
 
     </application>

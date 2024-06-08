@@ -10,12 +10,12 @@ import android.webkit.WebViewClient;
 import androidx.appcompat.app.AppCompatActivity;
 
 
-public class Email extends AppCompatActivity {
+public class ZBH extends AppCompatActivity {
 
     private WebView webViewNews;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.email);
+        setContentView(R.layout.zbh);
 
         // 配置 WebView
         webViewNews = findViewById(R.id.webView);
@@ -31,6 +31,6 @@ public class Email extends AppCompatActivity {
             }
         });
 
-        webViewNews.loadUrl("https://smail.swufe.edu.cn/");
+        webViewNews.loadUrl("https://info.swufe.edu.cn/xywfw/zbhfw.htm");
     }
 }

@@ -47,14 +47,30 @@ public class CategoriesMenu extends AppCompatActivity {
                     case 0:
                         startActivity(new Intent(CategoriesMenu.this, FAQActivity.class));
                         break;
+                    case 2:
+                        startActivity(new Intent(CategoriesMenu.this, Test.class));
+                        break;
                     case 3:
                         startActivity(new Intent(CategoriesMenu.this, DutyHome.class));
+                        break;
+                    case 4:
+                        startActivity(new Intent(CategoriesMenu.this, Internet.class));
+                        break;
+                    case 5:
+                        startActivity(new Intent(CategoriesMenu.this, ZBH.class));
+                        break;
+                    case 6:
+                        startActivity(new Intent(CategoriesMenu.this, Email.class));
+                        break;
+                    case 7:
+                        startActivity(new Intent(CategoriesMenu.this, VPN.class));
                         break;
 
                     case 10:
                         startActivity(new Intent(CategoriesMenu.this, SpeedTest.class));
                         break;
-
+                    case 11:
+                        startActivity(new Intent(CategoriesMenu.this, ManageActivity.class));
                     case 12:
                         startActivity(new Intent(CategoriesMenu.this, ManageActivity.class));
 

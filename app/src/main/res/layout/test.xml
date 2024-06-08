@@ -1,37 +1,32 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="#F5F5F5">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:gravity="center"
+            android:text="教程"
+            android:textColor="#333"
+            android:background="#F5F5F6"
+            android:textSize="24dp"
+            android:textStyle="bold" />
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:gravity="center"
-        android:text="教程"
-        android:textColor="#333"
+        android:layout_height="30dp"
         android:background="#F5F5F6"
-        android:textSize="24dp"
-        android:textStyle="bold" />
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
         android:gravity="center"
         android:text="（by西南财经大学信息化与大数据管理中心学生工作队）"
         android:textColor="#333"
-        android:background="#F5F5F6"
-        android:textSize="16dp"
-         />
-    <WebView
-        android:id="@+id/view_web"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:textSize="14dp"
+        tools:ignore="TextSizeCheck" />
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/pdfRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
-
-
-
-
-</LinearLayout>
+    </LinearLayout>
