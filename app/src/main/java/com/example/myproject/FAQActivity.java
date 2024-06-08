@@ -1,6 +1,9 @@
 package com.example.myproject;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.widget.EditText;
 import android.widget.ListView;
 import androidx.appcompat.app.AppCompatActivity;
 import java.util.ArrayList;
@@ -9,7 +12,9 @@ import java.util.List;
 public class FAQActivity extends AppCompatActivity {
 
     private ListView listViewFAQs;
+    private EditText editTextSearch;
     private List<FAQ> faqList;
+    private List<FAQ> filteredFaqList;
     private FAQAdapter faqAdapter;
 
     @Override
@@ -18,6 +23,7 @@ public class FAQActivity extends AppCompatActivity {
         setContentView(R.layout.home_questions);
 
         listViewFAQs = findViewById(R.id.listViewFAQs);
+        editTextSearch = findViewById(R.id.editTextSearch);
 
         faqList = new ArrayList<>();
         // 添加常见问题数据
@@ -35,15 +41,46 @@ public class FAQActivity extends AppCompatActivity {
                 "iNode客户端下载地址：https://info.swufe.edu.cn 首页>校园网服务>认证计费>客户端下载。\n"));
         faqList.add(new FAQ("iNode客户端使用方法", "iNode客户端安装完成以后，按照提示输入正确的用户名以及密码（UUID账号密码，移动用户要在用户名后添加“@cm”），输入密码时请注意大小写、标点符号，并使用英文输入。域请选择订购的网络套餐对应运营商；点击连接旁的小三角，在属性里的“选择网卡”一项中，选择名称中带有“PCIe”或“Realtek”的（如果使用了转换接口，请选择带有“USB”的）、或选择不带“WIFI”、 “wireless”、“Bluetooth”、“WLAN”或“本地连接”的。"));
         faqList.add(new FAQ("WebVPN", "校园网拥有大量数字资源和众多应用系统，如图书馆数字图书，教务系统，办公自动化系统等，由于资源厂商版权保护和系统安全要求，这些资源无法在校外直接使用。为了方便师生在校外学习工作，学校提供了WebVPN服务，可以在校外访问校内资源。\n" +
-                "全校师生可通过统一身份认证账号进行使用。\n"
-                +"使用方法\n"+
-                "1.访问“https://webvpn.swufe.edu.cn”，直接使用统一身份认证账号登录，即可访问校内资源。\n"+
+                "全校师生可通过统一身份认证账号进行使用。\n" +
+                "使用方法\n" +
+                "1.访问“https://webvpn.swufe.edu.cn”，直接使用统一身份认证账号登录，即可访问校内资源。\n" +
                 "2.在微信“移动校园”公众号中点击“融合门户”，点击“SWUFE移动校园”中的“webvpn”进行登录即可使用。\n"));
         faqList.add(new FAQ("正版化服务", "西南财经大学与微软（中国）有限公司签订合作协议，从2013年开始，我校参加微软校园软件正版化推进工作，免费为学生提供正版操作系统和软件。\n" +
                 "正版化网址：https://info.swufe.edu.cn/ 校园网服务>正版化服务\n"));
 
-
-        faqAdapter = new FAQAdapter(this, faqList);
+        filteredFaqList = new ArrayList<>(faqList);
+        faqAdapter = new FAQAdapter(this, filteredFaqList);
         listViewFAQs.setAdapter(faqAdapter);
+
+        editTextSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                // Not needed
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                filterFAQs(s.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                // Not needed
+            }
+        });
+    }
+
+    private void filterFAQs(String query) {
+        filteredFaqList.clear();
+        if (query.isEmpty()) {
+            filteredFaqList.addAll(faqList);
+        } else {
+            for (FAQ faq : faqList) {
+                if (faq.getQuestion().toLowerCase().contains(query.toLowerCase())) {
+                    filteredFaqList.add(faq);
+                }
+            }
+        }
+        faqAdapter.notifyDataSetChanged();
     }
 }
