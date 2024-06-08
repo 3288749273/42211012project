@@ -5,10 +5,13 @@
     <!-- 定义宋体字体样式 -->
     <style name="AppFontStyle">
         <item name="android:fontFamily">serif</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
     </style>
 
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- 将所有文本设置为宋体 -->
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
         <item name="android:textViewStyle">@style/AppFontStyle</item>
         <item name="android:editTextStyle">@style/AppFontStyle</item>
     </style>

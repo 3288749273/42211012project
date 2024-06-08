@@ -47,6 +47,9 @@ public class CategoriesMenu extends AppCompatActivity {
                     case 0:
                         startActivity(new Intent(CategoriesMenu.this, FAQActivity.class));
                         break;
+                    case 3:
+                        startActivity(new Intent(CategoriesMenu.this, DutyHome.class));
+                        break;
 
                     case 10:
                         startActivity(new Intent(CategoriesMenu.this, SpeedTest.class));

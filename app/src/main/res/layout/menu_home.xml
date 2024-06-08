@@ -8,7 +8,8 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="646dp">
+        android:layout_height="720dp"
+        >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -150,6 +151,7 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/morenews"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
@@ -163,8 +165,10 @@
             </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/LinearLayoutnews"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:background="#FFFFFF"
@@ -173,11 +177,9 @@
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="100dp"
-                android:layout_weight="3"
+                android:layout_weight="2.8"
                 android:orientation="vertical"
                 android:id="@+id/homenews">
-
-
 
                 <TextView
                     android:id="@+id/listViewNews"
@@ -187,15 +189,26 @@
                     android:gravity="center_vertical"
                     android:text="校园网新版认证系统使用帮助"
                     android:textSize="20dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1.2"
+                android:orientation="vertical"
+                android:id="@+id/homenewsimg">
 
                 <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="10dp"
-                    android:background="@mipmap/img3">
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="8dp"
+                    android:background="@mipmap/img_news">
                 </ImageView>
-
             </LinearLayout>
+
         </LinearLayout>
 
         </LinearLayout>
@@ -204,7 +217,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="match_parent"
         android:weightSum="4">
         <RelativeLayout
             android:layout_width="0dp"

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="#F5F5F5"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#F5F5F6"
+        android:gravity="center"
+        android:text="值班信息"
+        android:textColor="#333"
+        android:textSize="24dp"
+        android:textStyle="bold" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textSize="24dp"
+        android:text="义修队日常值班地点:">
+    </TextView>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textSize="20dp"
+        android:text="其孜楼2-5">
+    </TextView>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textSize="24dp"
+        android:text="义修队日常值班时间:">
+    </TextView>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textSize="20dp"
+        android:text="周一至周四：">
+    </TextView>
+    <TextView
+        android:layout_marginLeft="40dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textSize="20dp"
+        android:text="上午三四节 下午八九节">
+    </TextView>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textSize="20dp"
+        android:text="周五：">
+    </TextView>
+    <TextView
+        android:layout_marginLeft="40dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textSize="20dp"
+        android:text="上午三四节">
+    </TextView>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textSize="16dp"
+        android:text="（因调休而产生的工作日不值班，有问题可在上班时间联系其孜楼老师，联系电话：87092701）">
+    </TextView>
+    <ImageView
+        android:id="@+id/homeduty"
+        android:layout_width="wrap_content"
+        android:layout_height="235dp"
+        android:layout_weight="1"
+        android:background="@mipmap/homeduty"
+        android:scaleType="fitCenter" />
+
+
+</LinearLayout>

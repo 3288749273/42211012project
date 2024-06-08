@@ -23,12 +23,12 @@ public class HomeMenu extends AppCompatActivity {
         LinearLayout homeduty = findViewById(R.id.homeduty);
         LinearLayout homemore = findViewById(R.id.homemore);
         //下导航
-        RelativeLayout menu01 = findViewById(R.id.menu01);
         RelativeLayout menu02 = findViewById(R.id.menu02);
         RelativeLayout menu03 = findViewById(R.id.menu03);
         RelativeLayout menu04 = findViewById(R.id.menu04);
 
-        ListView listViewNews = findViewById(R.id.listViewNews);
+        TextView morenews = findViewById(R.id.morenews);
+        LinearLayout LinearLayoutnews = findViewById(R.id.LinearLayoutnews);
 
         homequestions.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,25 +47,19 @@ public class HomeMenu extends AppCompatActivity {
         homeduty.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(HomeMenu.this, HomeMenu.class);
+                Intent intent = new Intent(HomeMenu.this, DutyHome.class);
                 startActivity(intent);
             }
         });
         homemore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(HomeMenu.this, HomeMenu.class);
+                Intent intent = new Intent(HomeMenu.this, CategoriesMenu.class);
                 startActivity(intent);
             }
         });
 
-        menu01.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(HomeMenu.this, HomeMenu.class);
-                startActivity(intent);
-            }
-        });
+
         menu02.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -88,7 +82,15 @@ public class HomeMenu extends AppCompatActivity {
             }
         });
 
-        listViewNews.setOnClickListener(new View.OnClickListener() {
+        morenews.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HomeMenu.this, MessagesMenu.class);
+                startActivity(intent);
+            }
+        });
+
+        LinearLayoutnews.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(HomeMenu.this, NewsHome.class);
