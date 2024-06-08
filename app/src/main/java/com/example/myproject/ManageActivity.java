@@ -1,95 +1,48 @@
 package com.example.myproject;
 
 import android.content.Intent;
-import android.os.AsyncTask;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
-import java.net.URL;
-
 public class ManageActivity extends AppCompatActivity {
 
-    private EditText editTextAdminID, editTextAdminPassword;
-    private Button buttonAdminLogin;
+    private DatabaseHelper db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_login);
 
-        editTextAdminID = findViewById(R.id.editTextAdminID);
-        editTextAdminPassword = findViewById(R.id.editTextAdminPassword);
-        buttonAdminLogin = findViewById(R.id.buttonAdminLogin);
+        db = new DatabaseHelper(this);
+
+        // 检查并添加默认管理员账号
+        EditText editTextAdminID = findViewById(R.id.editTextAdminID);
+        EditText editTextAdminPassword = findViewById(R.id.editTextAdminPassword);
+        Button buttonAdminLogin = findViewById(R.id.buttonAdminLogin);
 
         buttonAdminLogin.setOnClickListener(v -> {
             String adminID = editTextAdminID.getText().toString().trim();
             String adminPassword = editTextAdminPassword.getText().toString().trim();
-            new AdminLoginTask(adminID, adminPassword).execute();
-        });
-    }
-
-    private class AdminLoginTask extends AsyncTask<Void, Void, String> {
-        private String adminID, adminPassword;
-
-        AdminLoginTask(String adminID, String adminPassword) {
-            this.adminID = adminID;
-            this.adminPassword = adminPassword;
-        }
-
-        @Override
-        protected String doInBackground(Void... voids) {
-            // 发送请求到服务器
-            try {
-                URL url = new URL("http://192.168.237.131:8080/your_project/AdminServlet");
-                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-                conn.setRequestMethod("POST");
-                conn.setDoOutput(true);
-                conn.setDoInput(true);
-
-                OutputStream os = conn.getOutputStream();
-                BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(os, "UTF-8"));
-                String postParams = "action=check&id=" + adminID + "&password=" + adminPassword;
-                writer.write(postParams);
-                writer.flush();
-                writer.close();
-                os.close();
-
-                InputStream is = conn.getInputStream();
-                BufferedReader reader = new BufferedReader(new InputStreamReader(is, "UTF-8"));
-                StringBuilder sb = new StringBuilder();
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    sb.append(line);
-                }
-                reader.close();
-                is.close();
-
-                return sb.toString();
-            } catch (Exception e) {
-                e.printStackTrace();
-                return "Error: " + e.getMessage();
-            }
-        }
-
-        @Override
-        protected void onPostExecute(String result) {
-            if ("Valid admin".equals(result)) {
+            if (db.checkAdminUser(adminID, adminPassword)) {
                 Toast.makeText(ManageActivity.this, "管理员登录成功", Toast.LENGTH_SHORT).show();
                 showManageScreen();
+                saveLoginState(adminID);
             } else {
                 Toast.makeText(ManageActivity.this, "登录失败，请检查账号和密码", Toast.LENGTH_SHORT).show();
             }
-        }
+        });
+    }
+    private void saveLoginState(String adminID) {
+        SharedPreferences sharedPreferences = getSharedPreferences("user_prefs", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("admin_user_id", adminID); // 保存用户ID
+        editor.putBoolean("admin_is_logged_in", true); // 保存登录状态
+        editor.apply();
     }
 
     private void showManageScreen() {
@@ -104,8 +57,13 @@ public class ManageActivity extends AppCompatActivity {
         });
 
         buttonManageUsers.setOnClickListener(v -> {
-            Intent intent = new Intent(ManageActivity.this, ManageAdminActivity.class);
-            startActivity(intent);
+            // 实现管理用户的逻辑
+            Toast.makeText(ManageActivity.this, "管理用户功能尚未实现", Toast.LENGTH_SHORT).show();
         });
+    }
+
+    // 添加默认用户的方法
+    private void addDefaultUser(String id) {
+        db.addAdminUserById(id);
     }
 }

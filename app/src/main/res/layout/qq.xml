@@ -26,7 +26,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:textSize="20dp"
-        android:text="883895439">
+        android:text="883895439"
+        android:textIsSelectable="true">
     </TextView>
     <TextView
         android:layout_width="match_parent"
@@ -38,7 +39,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:textSize="20dp"
-        android:text="826788917">
+        android:text="826788917"
+        android:textIsSelectable="true">
     </TextView>
 
 

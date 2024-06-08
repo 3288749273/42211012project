@@ -107,6 +107,10 @@
             android:exported="true"
             tools:ignore="DuplicateActivity" />
 
+        <activity android:name=".QQ"
+            android:exported="true"
+            tools:ignore="DuplicateActivity" />
+
 
 
 

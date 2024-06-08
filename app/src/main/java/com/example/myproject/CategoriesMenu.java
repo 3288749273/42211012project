@@ -70,7 +70,8 @@ public class CategoriesMenu extends AppCompatActivity {
                         startActivity(new Intent(CategoriesMenu.this, SpeedTest.class));
                         break;
                     case 11:
-                        startActivity(new Intent(CategoriesMenu.this, ManageActivity.class));
+                        startActivity(new Intent(CategoriesMenu.this, QQ.class));
+                        break;
                     case 12:
                         startActivity(new Intent(CategoriesMenu.this, ManageActivity.class));
 

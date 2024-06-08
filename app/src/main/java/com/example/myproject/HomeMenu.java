@@ -33,7 +33,7 @@ public class HomeMenu extends AppCompatActivity {
         homequestions.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(HomeMenu.this, QuestionsHome.class);
+                Intent intent = new Intent(HomeMenu.this, FAQActivity.class);
                 startActivity(intent);
             }
         });
