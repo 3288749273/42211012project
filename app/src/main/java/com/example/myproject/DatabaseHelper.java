@@ -11,7 +11,7 @@ import android.util.Log;
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "user.db";
-    private static final int DATABASE_VERSION = 7; // 修改版本号为7
+    private static final int DATABASE_VERSION = 8; // 更新版本号
 
     // 用户表
     private static final String TABLE_USER = "users";
@@ -20,6 +20,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String COLUMN_PASSWORD = "password";
     private static final String COLUMN_PHONE = "phone";
     private static final String COLUMN_IMAGE = "image"; // 新增用于存储头像路径的列名
+    private static final String COLUMN_IDENTITY = "identity"; // 新增用户身份列
 
     // FAQ表
     private static final String TABLE_FAQ = "faqs";
@@ -43,7 +44,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 + COLUMN_NAME + " TEXT,"
                 + COLUMN_PASSWORD + " TEXT,"
                 + COLUMN_PHONE + " TEXT,"
-                + COLUMN_IMAGE + " TEXT" + ")"; // 将头像路径定义为TEXT类型
+                + COLUMN_IMAGE + " TEXT,"
+                + COLUMN_IDENTITY + " TEXT" + ")"; // 添加身份列
         db.execSQL(CREATE_USER_TABLE);
 
         // 创建FAQ表
@@ -52,7 +54,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 + COLUMN_QUESTION + " TEXT,"
                 + COLUMN_ANSWER + " TEXT" + ")";
         db.execSQL(CREATE_FAQ_TABLE);
-        // 插入默认问答数据
 
         // 创建管理员用户表
         String CREATE_ADMIN_USER_TABLE = "CREATE TABLE " + TABLE_ADMIN_USER + "("
@@ -64,7 +65,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(COLUMN_ADMIN_ID, firstAdminId);
         db.insert(TABLE_ADMIN_USER, null, values);
     }
-
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
@@ -79,18 +79,20 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     // 添加用户
-    public boolean addUser(String name, String id, String password, String phone) {
+    public boolean addUser(String name, String id, String password, String phone, String identity) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(COLUMN_NAME, name);
         values.put(COLUMN_ID, id);
         values.put(COLUMN_PASSWORD, password);
         values.put(COLUMN_PHONE, phone);
+        values.put(COLUMN_IDENTITY, identity);
 
         long result = db.insert(TABLE_USER, null, values);
         db.close();
         return result != -1;
     }
+
 
     // 验证用户
     public boolean checkUser(String id, String password) {
@@ -130,6 +132,24 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 null, null, null);
     }
 
+    public User getUserById(String id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(TABLE_USER, new String[]{COLUMN_ID, COLUMN_NAME, COLUMN_PHONE, COLUMN_IDENTITY}, COLUMN_ID + "=?",
+                new String[]{id}, null, null, null);
+        if (cursor != null) {
+            cursor.moveToFirst();
+        }
+        User user = new User(
+                cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_ID)),
+                cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_NAME)),
+                cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_PHONE)),
+                cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_IDENTITY))
+        );
+        cursor.close();
+        db.close();
+        return user;
+    }
+
     // 更新用户头像路径
     public boolean updateUserProfileImage(String id, String imagePath) {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -146,7 +166,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             return false;
         }
     }
-
 
     // 添加FAQ
     public boolean addFAQ(String question, String answer) {
@@ -231,6 +250,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.close();
         return false;
     }
+
     // 添加现有用户到管理员表
     public boolean addAdminUserById(String userId) {
         SQLiteDatabase db = this.getReadableDatabase();
@@ -249,6 +269,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             return false;
         }
     }
+
     public boolean adminUserExists(String id) {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.query(TABLE_ADMIN_USER, new String[]{COLUMN_ADMIN_ID}, COLUMN_ADMIN_ID + "=?", new String[]{id}, null, null, null);

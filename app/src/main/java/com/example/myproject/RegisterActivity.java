@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
@@ -75,6 +76,9 @@ public class RegisterActivity extends AppCompatActivity {
                     return;
                 }
 
+                RadioButton selectedIdentity = findViewById(checkedId);
+                String identity = selectedIdentity.getText().toString();
+
                 if (databaseHelper.isUserExists(id)) {
                     // 用户已存在，提示并跳转到登录页面
                     Toast.makeText(RegisterActivity.this, "用户已存在，请登录", Toast.LENGTH_SHORT).show();
@@ -82,7 +86,7 @@ public class RegisterActivity extends AppCompatActivity {
                     startActivity(intent);
                     finish();
                 } else {
-                    boolean isInserted = databaseHelper.addUser(name, id, password, phone);
+                    boolean isInserted = databaseHelper.addUser(name, id, password, phone, identity);
                     if (isInserted) {
                         Toast.makeText(RegisterActivity.this, "注册成功: " + name, Toast.LENGTH_SHORT).show();
                         saveLoginState(id); // 保存登录状态
