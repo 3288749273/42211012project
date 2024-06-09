@@ -32,15 +32,16 @@
             android:layout_height="wrap_content"
             android:hint="问题描述"
             android:inputType="textMultiLine"
-            android:minHeight="48dp"
+            android:minHeight="64dp"
             style="@style/AppFontStyle"></EditText>
+
         <EditText
             android:id="@+id/editTextStudentID"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="学号"
             android:inputType="number"
-            android:minHeight="48dp"
+            android:minHeight="64dp"
             style="@style/AppFontStyle"
             />
 
@@ -50,7 +51,7 @@
             android:layout_height="wrap_content"
             android:hint="联系方式"
             android:inputType="phone"
-            android:minHeight="48dp"
+            android:minHeight="64dp"
             style="@style/AppFontStyle"
             />
 
@@ -60,7 +61,8 @@
             android:layout_height="wrap_content"
             android:hint="预计线下维修时间"
             android:inputType="datetime"
-            android:minHeight="48dp"
+            android:minHeight="64dp"
+            android:layout_marginBottom="10dp"
             style="@style/AppFontStyle"
             />
 
@@ -69,6 +71,17 @@
             android:id="@+id/buttonSubmitStudent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="提交预约" />
+            android:text="提交预约"
+            android:layout_marginBottom="20dp"/>
+
+        <TextView
+
+            style="@style/AppFontStyle"
+            android:layout_width="match_parent"
+            android:layout_height="57dp"
+            android:text="注：选择线下维修请在值班时间携带电脑、电源适配器、转换器等物品来到其孜楼2-3">
+
+        </TextView>
     </LinearLayout>
+
 </ScrollView>

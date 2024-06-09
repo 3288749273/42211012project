@@ -89,7 +89,7 @@ public class RegisterActivity extends AppCompatActivity {
                     boolean isInserted = databaseHelper.addUser(name, id, password, phone, identity);
                     if (isInserted) {
                         Toast.makeText(RegisterActivity.this, "注册成功: " + name, Toast.LENGTH_SHORT).show();
-                        saveLoginState(id); // 保存登录状态
+                        saveLoginState(id, identity); // 保存登录状态
                         Intent intent = new Intent(RegisterActivity.this, HomeMenu.class);
                         startActivity(intent);
                         finish();
@@ -101,10 +101,11 @@ public class RegisterActivity extends AppCompatActivity {
         });
     }
 
-    private void saveLoginState(String userId) {
+    private void saveLoginState(String userId, String identity) {
         SharedPreferences sharedPreferences = getSharedPreferences("user_prefs", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("user_id", userId); // 保存用户ID
+        editor.putString("user_identity", identity); // 保存用户身份
         editor.putBoolean("is_logged_in", true); // 保存登录状态
         editor.apply();
     }

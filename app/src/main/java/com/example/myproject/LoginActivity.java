@@ -23,42 +23,40 @@ public class LoginActivity extends AppCompatActivity {
 
         initData();
     }
+
     private void initData() {
         databaseHelper = new DatabaseHelper(this);
 
         editTextID = findViewById(R.id.editTextID);
         editTextPassword = findViewById(R.id.editTextPassword);
-        Button buttonLogin = findViewById(R.id.buttonLogin);
-
+        buttonLogin = findViewById(R.id.buttonLogin);
 
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String id = editTextID.getText().toString().trim();
-                String password = editTextPassword.getText().toString();
-                // 检查用户输入的学号/工号和密码是否匹配数据库中的记录
-                boolean isValid = databaseHelper.checkUser(id, password);
+                String password = editTextPassword.getText().toString().trim();
 
-                if (isValid) {
-                    // 登录成功，跳转到主页
+                if (databaseHelper.checkUser(id, password)) {
+                    User user = databaseHelper.getUserById(id);
+                    saveLoginState(user.getId(), user.getIdentity());
                     Toast.makeText(LoginActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(LoginActivity.this, HomeMenu.class);
                     startActivity(intent);
-                    finish(); // 结束当前的登录页面
+                    finish();
                 } else {
-                    // 登录失败，显示提示信息
-                    Toast.makeText(LoginActivity.this, "登陆失败", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "登录失败，请检查账号和密码", Toast.LENGTH_SHORT).show();
                 }
             }
         });
-
     }
-    private void saveLoginState(String userId) {
+
+    private void saveLoginState(String userId, String identity) {
         SharedPreferences sharedPreferences = getSharedPreferences("user_prefs", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("user_id", userId); // 保存用户ID
+        editor.putString("user_identity", identity); // 保存用户身份
         editor.putBoolean("is_logged_in", true); // 保存登录状态
         editor.apply();
     }
 }
-

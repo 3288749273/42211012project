@@ -32,7 +32,8 @@
             style="@style/AppFontStyle"
             android:hint="问题描述"
             android:inputType="textMultiLine"
-            android:minHeight="48dp" />
+            android:minHeight="64dp"
+            />
 
         <EditText
             android:id="@+id/editTextRepairTime"
@@ -40,7 +41,7 @@
             android:layout_height="wrap_content"
             android:hint="预计线下维修时间"
             android:inputType="datetime"
-            android:minHeight="48dp"
+            android:minHeight="64dp"
             style="@style/AppFontStyle"
             />
 
@@ -50,7 +51,7 @@
             android:layout_height="wrap_content"
             android:hint="办公室地点"
             android:inputType="text"
-            android:minHeight="48dp"
+            android:minHeight="64dp"
             style="@style/AppFontStyle"
             />
 
@@ -60,7 +61,7 @@
             android:layout_height="wrap_content"
             android:hint="称呼"
             android:inputType="textPersonName"
-            android:minHeight="48dp"
+            android:minHeight="64dp"
             style="@style/AppFontStyle"
             />
 
@@ -70,8 +71,9 @@
             android:layout_height="wrap_content"
             android:hint="联系方式"
             android:inputType="phone"
-            android:minHeight="48dp"
             style="@style/AppFontStyle"
+            android:minHeight="64dp"
+            android:layout_marginBottom="10dp"
             />
 
         <Button
@@ -79,6 +81,16 @@
             style="@style/RegisterButtonStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="提交预约" />
+            android:text="提交预约"
+            android:layout_marginBottom="20dp"/>
+
+        <TextView
+
+            style="@style/AppFontStyle"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="注：预约线下维修后，将会有同学按照联系方式联系您沟通线下维修时间，请尽量保持通讯畅通。">
+
+        </TextView>
     </LinearLayout>
 </ScrollView>

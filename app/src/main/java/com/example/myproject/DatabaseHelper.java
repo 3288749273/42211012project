@@ -11,7 +11,7 @@ import android.util.Log;
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "user.db";
-    private static final int DATABASE_VERSION = 8; // 更新版本号
+    private static final int DATABASE_VERSION = 9; // 更新版本号
 
     // 用户表
     private static final String TABLE_USER = "users";
@@ -31,6 +31,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     // 管理员用户表
     private static final String TABLE_ADMIN_USER = "admin_users";
     private static final String COLUMN_ADMIN_ID = "id";
+
+    // 教师预约表
+    private static final String TABLE_TEACHER_APPOINTMENT = "teacher_appointments";
+    private static final String COLUMN_ISSUE = "issue";
+    private static final String COLUMN_REPAIR_TIME = "repair_time";
+    private static final String COLUMN_OFFICE = "office";
+
+    // 学生预约表
+    private static final String TABLE_STUDENT_APPOINTMENT = "student_appointments";
+    private static final String COLUMN_STUDENT_ID = "student_id";
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -59,6 +69,28 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String CREATE_ADMIN_USER_TABLE = "CREATE TABLE " + TABLE_ADMIN_USER + "("
                 + COLUMN_ADMIN_ID + " TEXT PRIMARY KEY" + ")";
         db.execSQL(CREATE_ADMIN_USER_TABLE);
+
+        // 创建教师预约表
+        String CREATE_TEACHER_APPOINTMENT_TABLE = "CREATE TABLE " + TABLE_TEACHER_APPOINTMENT + "("
+                + COLUMN_ID + " TEXT,"
+                + COLUMN_ISSUE + " TEXT,"
+                + COLUMN_REPAIR_TIME + " TEXT,"
+                + COLUMN_OFFICE + " TEXT,"
+                + COLUMN_NAME + " TEXT,"
+                + COLUMN_PHONE + " TEXT,"
+                + "FOREIGN KEY(" + COLUMN_ID + ") REFERENCES " + TABLE_USER + "(" + COLUMN_ID + "))";
+        db.execSQL(CREATE_TEACHER_APPOINTMENT_TABLE);
+
+        // 创建学生预约表
+        String CREATE_STUDENT_APPOINTMENT_TABLE = "CREATE TABLE " + TABLE_STUDENT_APPOINTMENT + "("
+                + COLUMN_ID + " TEXT,"
+                + COLUMN_ISSUE + " TEXT,"
+                + COLUMN_REPAIR_TIME + " TEXT,"
+                + COLUMN_STUDENT_ID + " TEXT,"
+                + COLUMN_PHONE + " TEXT,"
+                + "FOREIGN KEY(" + COLUMN_ID + ") REFERENCES " + TABLE_USER + "(" + COLUMN_ID + "))";
+        db.execSQL(CREATE_STUDENT_APPOINTMENT_TABLE);
+
         // 添加第一个管理员用户
         String firstAdminId = "42211012";
         ContentValues values = new ContentValues();
@@ -73,6 +105,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             db.execSQL("DROP TABLE IF EXISTS " + TABLE_USER);
             db.execSQL("DROP TABLE IF EXISTS " + TABLE_FAQ);
             db.execSQL("DROP TABLE IF EXISTS " + TABLE_ADMIN_USER);
+            db.execSQL("DROP TABLE IF EXISTS " + TABLE_TEACHER_APPOINTMENT);
+            db.execSQL("DROP TABLE IF EXISTS " + TABLE_STUDENT_APPOINTMENT);
             // 重新创建表
             onCreate(db);
         }
@@ -89,6 +123,36 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(COLUMN_IDENTITY, identity);
 
         long result = db.insert(TABLE_USER, null, values);
+        db.close();
+        return result != -1;
+    }
+
+    // 添加教师预约
+    public boolean addTeacherAppointment(String id, String issue, String repairTime, String office, String name, String phone) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_ID, id);
+        values.put(COLUMN_ISSUE, issue);
+        values.put(COLUMN_REPAIR_TIME, repairTime);
+        values.put(COLUMN_OFFICE, office);
+        values.put(COLUMN_NAME, name);
+        values.put(COLUMN_PHONE, phone);
+
+        long result = db.insert(TABLE_TEACHER_APPOINTMENT, null, values);
+        db.close();
+        return result != -1;
+    }
+
+    public boolean addStudentAppointment(String id, String issue, String repairTime, String studentId, String phone) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_ID, id);
+        values.put(COLUMN_ISSUE, issue);
+        values.put(COLUMN_REPAIR_TIME, repairTime);
+        values.put(COLUMN_STUDENT_ID, studentId);
+        values.put(COLUMN_PHONE, phone);
+
+        long result = db.insert(TABLE_STUDENT_APPOINTMENT, null, values);
         db.close();
         return result != -1;
     }
@@ -177,11 +241,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         long result = db.insert(TABLE_FAQ, null, values);
         db.close();
         return result != -1;
-    }
-
-    private void addDefaultFAQs(SQLiteDatabase db) {
-        addFAQ("校园网认证提示“用户不存在”或“用户没有申请该服务”", "请先检查以下五个问题："+"");
-        addFAQ("如何修改密码？", "登录后进入设置页面，可以找到修改密码的选项。");
     }
 
     // 获取所有FAQs
