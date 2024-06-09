@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:background="#F5F5F6"
+    >
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/white"
+        >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:gravity="center"
+            android:text="线下维修预约"
+            android:textColor="#333"
+            android:background="#F5F5F6"
+            android:textSize="24dp"
+            android:textStyle="bold" />
+
+
+        <EditText
+            android:id="@+id/editTextIssue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="问题描述"
+            android:inputType="textMultiLine"
+            android:minHeight="48dp"
+            style="@style/AppFontStyle"></EditText>
+        <EditText
+            android:id="@+id/editTextStudentID"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="学号"
+            android:inputType="number"
+            android:minHeight="48dp"
+            style="@style/AppFontStyle"
+            />
+
+        <EditText
+            android:id="@+id/editTextPhone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="联系方式"
+            android:inputType="phone"
+            android:minHeight="48dp"
+            style="@style/AppFontStyle"
+            />
+
+        <EditText
+            android:id="@+id/editTextRepairTime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="预计线下维修时间"
+            android:inputType="datetime"
+            android:minHeight="48dp"
+            style="@style/AppFontStyle"
+            />
+
+        <Button
+            style="@style/RegisterButtonStyle"
+            android:id="@+id/buttonSubmitStudent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="提交预约" />
+    </LinearLayout>
+</ScrollView>

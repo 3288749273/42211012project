@@ -115,6 +115,13 @@
             android:exported="true"
             tools:ignore="DuplicateActivity" />
 
+        <activity android:name=".StudentAppointmentActivity"
+            android:exported="true"
+            tools:ignore="DuplicateActivity" />
+
+        <activity android:name=".TeacherAppointmentActivity"
+            android:exported="true"
+            tools:ignore="DuplicateActivity" />
 
 
 
