@@ -67,8 +67,7 @@ public class MyMenu extends AppCompatActivity {
         myMassages.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // 跳转到个人信息页面
-                // startActivity(new Intent(MyMenu.this, AccountSecurityActivity.class));
+                startActivity(new Intent(MyMenu.this, UserInfoActivity.class));
             }
         });
 

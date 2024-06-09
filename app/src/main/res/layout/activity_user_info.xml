@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#F5F5F6"
+    android:padding="16dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:text="个人信息"
+        android:textColor="#333"
+        android:background="#F5F5F6"
+        android:textSize="24dp"
+        android:textStyle="bold" />
+
+
+    <TextView
+        android:id="@+id/textViewUserName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:text="姓名："
+        android:background="#FFFFFF"
+        android:textSize="18sp"
+        android:textColor="#333" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#DDDDDD" />
+
+    <TextView
+        android:id="@+id/textViewUserId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:text="学号："
+        android:textSize="18sp"
+        android:textColor="#333"
+        android:background="#FFFFFF"
+        />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#DDDDDD" />
+
+    <TextView
+        android:id="@+id/textViewUserPhone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:text="电话号码："
+        android:textSize="18sp"
+        android:textColor="#333"
+        android:background="#FFFFFF"
+        />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#DDDDDD" />
+
+    <TextView
+        android:id="@+id/textViewUserIdentity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:text="身份："
+        android:textSize="18sp"
+        android:textColor="#333"
+        android:background="#FFFFFF"
+        />
+</LinearLayout>

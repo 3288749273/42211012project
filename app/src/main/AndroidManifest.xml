@@ -111,6 +111,11 @@
             android:exported="true"
             tools:ignore="DuplicateActivity" />
 
+        <activity android:name=".UserInfoActivity"
+            android:exported="true"
+            tools:ignore="DuplicateActivity" />
+
+
 
 
 

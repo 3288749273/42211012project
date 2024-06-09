@@ -4,7 +4,7 @@ public class User {
     private String id;
     private String name;
     private String phone;
-    private String identity; // 新增身份属性
+    private String identity;
 
     public User(String id, String name, String phone, String identity) {
         this.id = id;
