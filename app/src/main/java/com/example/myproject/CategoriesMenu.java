@@ -13,11 +13,11 @@ public class CategoriesMenu extends AppCompatActivity {
     private GridView mGridView;
     private CategoriesAdapter mCategoriesAdapter;
     private String[] categoryNames = new String[]{"常见问题", "线下维修预约", "教程", "线下值班信息",
-            "认证计费","正版化服务", "云邮箱服务", "校外访问", "修改密码", "提问留言","网络测速","答疑群",
+            "认证计费","正版化服务", "云邮箱服务", "校外访问","网络测速","答疑群",
             "管理"};
     private int[] categoryIcons = {R.mipmap.ic_question, R.mipmap.ic_book, R.mipmap.ic_test,
             R.mipmap.ic_location, R.mipmap.ic_jifei, R.mipmap.ic_zhengbanhua, R.mipmap.ic_email,
-            R.mipmap.ic_vpn, R.mipmap.ic_password,R.mipmap.ic_liuyan,R.mipmap.ic_speed,R.mipmap.ic_qq,
+            R.mipmap.ic_vpn,R.mipmap.ic_speed,R.mipmap.ic_qq,
             R.mipmap.ic_manage};
 
     @Override
@@ -65,14 +65,13 @@ public class CategoriesMenu extends AppCompatActivity {
                     case 7:
                         startActivity(new Intent(CategoriesMenu.this, VPN.class));
                         break;
-
-                    case 10:
+                    case 8:
                         startActivity(new Intent(CategoriesMenu.this, SpeedTest.class));
                         break;
-                    case 11:
+                    case 9:
                         startActivity(new Intent(CategoriesMenu.this, QQ.class));
                         break;
-                    case 12:
+                    case 10:
                         startActivity(new Intent(CategoriesMenu.this, ManageActivity.class));
 
 

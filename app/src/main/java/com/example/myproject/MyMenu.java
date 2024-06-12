@@ -74,8 +74,7 @@ public class MyMenu extends AppCompatActivity {
         accountSecurity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // 跳转到账号与安全界面
-                // startActivity(new Intent(MyMenu.this, AccountSecurityActivity.class));
+                startActivity(new Intent(MyMenu.this, AccountSecurityActivity.class));
             }
         });
 

@@ -337,4 +337,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.close();
         return exists;
     }
+    // 获取所有教师预约记录
+    public Cursor getAllTeacherAppointments() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        return db.rawQuery("SELECT rowid AS _id, issue, repair_time, office FROM " + TABLE_TEACHER_APPOINTMENT, null);
+    }
 }

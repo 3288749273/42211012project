@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+
+
+    <TextView
+        android:id="@+id/textViewIssue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="24dp"
+        android:layout_marginBottom="10dp"
+        android:text="问题:" />
+
+    <TextView
+        android:id="@+id/textViewRepairTime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="24dp"
+        android:layout_marginBottom="10dp"
+        android:text="预约维修时间：" />
+
+    <TextView
+        android:id="@+id/textViewOffice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="24dp"
+        android:layout_marginBottom="10dp"
+        android:text="办公室位置：" />
+
+</LinearLayout>

@@ -9,13 +9,14 @@
         android:id="@+id/editTextQuestion"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Question"
-        android:minHeight="48dp" />
+        android:hint="问题"
+        android:inputType="text" />
 
     <EditText
         android:id="@+id/editTextAnswer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Answer"
-        android:minHeight="48dp" />
+        android:hint="答案"
+        android:inputType="text" />
 </LinearLayout>
+

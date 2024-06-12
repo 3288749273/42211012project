@@ -31,6 +31,7 @@
         android:text="添加常见问题"
         android:background="?android:attr/selectableItemBackground"
         android:textColor="?android:attr/textColorPrimary" />
+
     <Button
         android:id="@+id/buttonDeleteFAQ"
         style="@style/RegisterButtonStyle"
@@ -40,6 +41,7 @@
         android:text="删除常见问题"
         android:background="?android:attr/selectableItemBackground"
         android:textColor="?android:attr/textColorPrimary" />
+
     <Button
         android:id="@+id/buttonRevisedFAQ"
         style="@style/RegisterButtonStyle"
@@ -49,6 +51,8 @@
         android:text="修改常见问题"
         android:background="?android:attr/selectableItemBackground"
         android:textColor="?android:attr/textColorPrimary" />
+
+
 
     <ListView
         android:id="@+id/listViewFAQs"
